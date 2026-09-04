@@ -52,11 +52,7 @@ class DetectBlue:
         upper_blue = 120
 
         # Apply the threshold for the colour detection
-        mask = mask = cv2.inRange(
-            hsv,
-            (lower_blue, 50, 50),
-            (upper_blue, 255, 255)
-        )
+        mask = cv2.inRange(hsv, (lower_blue, 50, 50), (upper_blue, 255, 255))
 
         # Shows the detected colour from the mask
         res = cv2.bitwise_and(img, img, mask=mask)
@@ -121,22 +117,14 @@ class DetectRed:
         lower_red = 0
         upper_red = 20
 
-        low_mask = mask = cv2.inRange(
-            hsv,
-            (lower_red, 50, 50),
-            (upper_red, 255, 255)
-        )
-        
-        # detect both hsv red ranges 
+        low_mask = cv2.inRange(hsv, (lower_red, 50, 50), (upper_red, 255, 255))
+
+        # detect both hsv red ranges
         lower_red = 170
         upper_red = 180
 
-        high_mask = mask = cv2.inRange(
-            hsv,
-            (lower_red, 50, 50),
-            (upper_red, 255, 255)
-        )
-        
+        high_mask = cv2.inRange(hsv, (lower_red, 50, 50), (upper_red, 255, 255))
+
         mask = cv2.bitwise_or(low_mask, high_mask)
 
         # Shows the detected colour from the mask
