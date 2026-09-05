@@ -48,14 +48,11 @@ class DetectBlue:
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
         # Set upper and lower bounds for colour detection, this is in HSV
-        lower_blue = 80
-        upper_blue = 120
+        lower_blue = 90
+        upper_blue = 110
 
         # Apply the threshold for the colour detection
-        mask = cv2.inRange(hsv, (lower_blue, 50, 50), (upper_blue, 255, 255))
-
-        # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img, img, mask=mask)
+        mask = cv2.inRange(hsv, (lower_blue, 120, 120), (upper_blue, 255, 255))
 
         # ============
         # ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
@@ -66,10 +63,7 @@ class DetectBlue:
         cv2.drawContours(img, contours, -1, (0, 255, 0), 2)
 
         # Show the annotated detection!
-        cv2.imwrite(str(output_path), img)
-
-        # Show res to see the result of what is being filtered in the colour detection
-        # cv2.imwrite(str(output_path), res)
+        cv2.imwrite(str(output_path), mask) # change this shit back to img later
 
         # This parameter is needed to run tests
         return mask if return_mask else None
@@ -115,20 +109,17 @@ class DetectRed:
 
         # Set upper and lower bounds for colour detection, this is in HSV
         lower_red = 0
-        upper_red = 20
+        upper_red = 10
 
-        low_mask = cv2.inRange(hsv, (lower_red, 50, 50), (upper_red, 255, 255))
+        low_mask = cv2.inRange(hsv, (lower_red, 120, 120), (upper_red, 255, 255))
 
         # detect both hsv red ranges
         lower_red = 170
         upper_red = 180
 
-        high_mask = cv2.inRange(hsv, (lower_red, 50, 50), (upper_red, 255, 255))
+        high_mask = cv2.inRange(hsv, (lower_red, 120, 120), (upper_red, 255, 255))
 
         mask = cv2.bitwise_or(low_mask, high_mask)
-
-        # Shows the detected colour from the mask
-        res = cv2.bitwise_and(img, img, mask=mask)
 
         # Annotate the colour detections
         # replace the '_' parameter with the appropiate variable
@@ -141,9 +132,6 @@ class DetectRed:
 
         # Show the annotated detection!
         cv2.imwrite(str(output_path), img)
-
-        # Show res to see the result of what is being filtered in the colour detection
-        # cv2.imwrite(str(output_path), res)
 
         # ============
         # ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
