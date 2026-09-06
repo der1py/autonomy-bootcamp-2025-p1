@@ -52,7 +52,6 @@ class DetectBlue:
         upper_blue = 112
 
         # Apply the threshold for the colour detection
-        # lower 120 120
         mask = cv2.inRange(hsv, (lower_blue, 150, 70), (upper_blue, 255, 255))
 
         # ============
@@ -64,7 +63,7 @@ class DetectBlue:
         cv2.drawContours(img, contours, -1, (0, 255, 0), 2)
 
         # Show the annotated detection!
-        cv2.imwrite(str(output_path), mask) # change this shit back to img later
+        cv2.imwrite(str(output_path), mask)  # change this shit back to img later
 
         # This parameter is needed to run tests
         return mask if return_mask else None
